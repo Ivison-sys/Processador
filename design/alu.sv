@@ -12,17 +12,25 @@ module alu#(
         output logic[DATA_WIDTH-1:0] ALUResult
         );
     
-        always_comb
-        begin
+        always_comb begin
+          
+        end
+        begin 
             case(Operation)
-            4'b0000:        // AND
-                    ALUResult = SrcA & SrcB;
-            4'b0010:        // ADD
-                    ALUResult = SrcA + SrcB;
-            4'b1000:        // Equal
-                    ALUResult = (SrcA == SrcB) ? 1 : 0;
+            4'b0000:        // ADD
+                ALUResult = SrcA + SrcB;
+            4'b0001: // SUB
+                Alu_Result = SrcA - SrcB;
+            4'b0010:        
+                ALUResult = SrcA ^ SrcB;
+            4'b0011:
+                ALUResult = SrcA | SrcB;
+            4'b0100:
+                Alu_Result = SrcA & SrcB;
+            4'b1000: // Equal
+                ALUResult = (SrcA == SrcB) ? 1 : 0;
             default:
-                    ALUResult = 0;
+                ALUResult = 0;
             endcase
         end
 endmodule
