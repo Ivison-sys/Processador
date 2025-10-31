@@ -11,20 +11,58 @@ module ALUController (
 );
 
     always_comb begin
-        if((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0000000)) begin
-            Operation <= 0000; // ADD
-        end else if((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0100000)) begin 
-            Operation <= 0001; // SUB
-        end else if((ALUOp == 2'b10) && (Funct3 == 3'b100) && (Funct7 == 7'b0000000)) begin 
-            Operation <= 0010; // XOR
-        end else if((ALUOp == 2'b10) && (Funct3 == 3'b110) && (Funct7 == 7'b0000000)) begin 
-            Operation <= 0011; // OR
-        end else if((ALUOp == 2'b10) && (Funct3 == 3'b111) && (Funct7 == 7'b0000000)) begin 
-            Operation <= 0100; // AND
-        end else if((ALUOp == 2'b10) && (Funct3 == 3'b101)) begin 
-            Operation <= 1000; // BEQ
-        end 
+        if (ALUOp == 2'b10) begin //Tipo R
+            if((Funct3 == 3'b000) && (Funct7 == 7'b0000000)) begin
+                Operation <= 0000; // ADD
+            end else if((Funct3 == 3'b000) && (Funct7 == 7'b0100000)) begin 
+                Operation <= 0001; // SUB
+            end else if((Funct3 == 3'b100) && (Funct7 == 7'b0000000)) begin 
+                Operation <= 0010; // XOR
+            end else if((Funct3 == 3'b110) && (Funct7 == 7'b0000000)) begin 
+                Operation <= 0011; // OR
+            end else if((Funct3 == 3'b111) && (Funct7 == 7'b0000000)) begin 
+                Operation <= 0100; // AND
+            end else if((Funct3 == 3'b101) && (Funct7 == 7'b0000000)) begin 
+                Operation <= 0101; // srl
+            end else if((Funct3 == 3'b001) && (Funct7 == 7'b0000000)) begin
+                Operation <= 0110; //sll  
+            end else if((Funct3 == 3'b101) && (Funct7 == 7'b0100000)) begin
+                Operation <= 0111; //sra
+            end else if((Funct3 == 3'b010) && (Funct7 == 7'b0000000)) begin
+                Operation <= 1000; //slt
+            end else if((Funct3 == 3'b011) && (Funct7 == 7'b0000000)) begin
+                Operation <= 1001; //sltu
+            end
+        end else if (ALUOp == 2'b00) begin
+            Operation <= 0000; //Recebe o codigo do add. ULA calcula o endereco de mem. para lw/sw
+        end else if (ALUOp == 2'b01) begin
+            Operation <= 1010; //BEQ
+        end
     end
+    
+    
+    
+    
+    
+    
+    
+    // always_comb begin
+    //     if((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0000000)) begin
+    //         Operation <= 0000; // ADD
+    //     end else if((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0100000)) begin 
+    //         Operation <= 0001; // SUB
+    //     end else if((ALUOp == 2'b10) && (Funct3 == 3'b100) && (Funct7 == 7'b0000000)) begin 
+    //         Operation <= 0010; // XOR
+    //     end else if((ALUOp == 2'b10) && (Funct3 == 3'b110) && (Funct7 == 7'b0000000)) begin 
+    //         Operation <= 0011; // OR
+    //     end else if((ALUOp == 2'b10) && (Funct3 == 3'b111) && (Funct7 == 7'b0000000)) begin 
+    //         Operation <= 0100; // AND
+    //     end else if((ALUOp == 2'b10) && (Funct3 == 3'b101)) begin 
+    //         Operation <= 0101; // srl
+    //     end else if((ALUOp == 2'b10) && (Funct3 == 3'b001) && (Funct7 == 7'b0000000)) begin
+    //         Operation <= 0110; //sll
+    //     end else if((ALUOp == 2'b))
+    // end
 
 
 //   assign Operation[0] = ((ALUOp == 2'b10) && (Funct3 == 3'b110)) ||  // R\I-or
