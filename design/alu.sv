@@ -17,17 +17,27 @@ module alu#(
         end
         begin 
             case(Operation)
-            4'b0000:        // ADD
+            4'b0000: // ADD
                 ALUResult = SrcA + SrcB;
             4'b0001: // SUB
-                Alu_Result = SrcA - SrcB;
-            4'b0010:        
+                ALUResult = SrcA - SrcB;
+            4'b0010: // XOR   
                 ALUResult = SrcA ^ SrcB;
-            4'b0011:
+            4'b0011: // OR
                 ALUResult = SrcA | SrcB;
-            4'b0100:
-                Alu_Result = SrcA & SrcB;
-            4'b1000: // Equal
+            4'b0100: // AND
+                ALUResult = SrcA & SrcB;
+            4'b0101: // srl
+                ALUResult = SrcA >> SrcB;
+            4'b0110: // sll
+                ALUResult = SrcA << SrcB;
+            4'b0111: //sra
+                ALUResult = SrcA >>> SrcB;
+            4'b1000: //slt
+                //ALUResult = (SrcA < SrcB) ? 1 : 0; *ver depois como converter pra signed
+            4'b1001: //sltu
+                ALUResult = (SrcA < SrcB) ? 1 : 0;
+            4'b1010: // Equal(BEQ)
                 ALUResult = (SrcA == SrcB) ? 1 : 0;
             default:
                 ALUResult = 0;
