@@ -34,7 +34,7 @@ module alu#(
             4'b0111: //sra
                 ALUResult = SrcA >>> SrcB;
             4'b1000: //slt
-                //ALUResult = (SrcA < SrcB) ? 1 : 0; *ver depois como converter pra signed
+                ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0; 
             4'b1001: //sltu
                 ALUResult = (SrcA < SrcB) ? 1 : 0;
             4'b1010: // Equal(BEQ)
