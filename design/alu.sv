@@ -40,7 +40,7 @@ module alu#(
             4'b1010: // Equal(BEQ)
                 ALUResult = (SrcA == SrcB) ? 1 : 0;
             default:
-                ALUResult = 0;
+                ALUResult = 1;
             endcase
         end
 endmodule
