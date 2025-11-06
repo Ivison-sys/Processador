@@ -14,8 +14,7 @@ module alu#(
     
         always_comb begin
           
-        end
-        begin 
+       
             case(Operation)
             4'b0000: // ADD
                 ALUResult = SrcA + SrcB;
