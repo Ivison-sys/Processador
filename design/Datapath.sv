@@ -14,7 +14,7 @@ module Datapath #(
     reset,
     RegWrite,
     MemtoReg,  // Register file writing enable   // Memory or ALU MUX
-    ALUsrc,
+    ALUSrc,
     MemWrite,  // Register file or Immediate MUX // Memroy Writing Enable
     MemRead,  // Memroy Reading Enable
     Branch,  // Branch Enable
@@ -152,7 +152,7 @@ module Datapath #(
       B.func7 <= 0;
       B.Curr_Instr <= A.Curr_Instr;  //debug tmp
     end else begin
-      B.ALUSrc <= ALUsrc;
+      B.ALUSrc <= ALUSrc;
       B.MemtoReg <= MemtoReg;
       B.RegWrite <= RegWrite;
       B.MemRead <= MemRead;

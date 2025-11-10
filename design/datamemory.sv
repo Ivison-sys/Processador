@@ -18,13 +18,10 @@ module datamemory #(
   logic [31:0] Datain;
   logic [31:0] Dataout;
   logic [ 3:0] Wr;
-  logic [DM_ADDRESS - 1:0] word_aligned_a;
-
-  assign word_aligned_a = a & ~3;
 
   Memoria32Data mem32 (
-      .raddress({{22{1'b0}}, word_aligned_a}),
-      .waddress({{22{1'b0}}, word_aligned_a}),
+      .raddress(raddress),
+      .waddress(waddress),
       .Clk(~clk),
       .Datain(Datain),
       .Dataout(Dataout),
@@ -41,20 +38,20 @@ module datamemory #(
     if (MemRead) begin
       case (Funct3)
         3'b010:  //LW
-        rd <= (Dataout);
+        rd <= Dataout;
         3'b000: begin  //LB
           case (a[1:0])
-            2'b00: rd <= {{24{(Dataout[7])}}, (Dataout[7:0])};
-            2'b01: rd <= {{24{(Dataout[15])}}, (Dataout[15:8])};
-            2'b10: rd <= {{24{(Dataout[23])}}, (Dataout[23:16])};
-            2'b11: rd <= {{24{(Dataout[31])}}, Dataout[31:24]};
+            2'b00: rd <= {{24{Dataout[7]}}, Dataout[7:0]};
+            2'b01: rd <= {{24{Dataout[15]}}, Dataout[15:8]};
+            2'b10: rd <= {{24{Dataout[23]}}, Dataout[23:16]};
+            2'b11: rd <= {{24{Dataout[31]}}, Dataout[31:24]};
             default: rd <= Dataout;
           endcase
         end
         3'b001: begin  //LH
           case (a[1])
-            1'b0: rd <= {{16{(Dataout[15])}}, Dataout[15:0]};
-            1'b1: rd <= {{16{(Dataout[31])}}, Dataout[31:16]};
+            1'b0: rd <= {{16{Dataout[15]}}, Dataout[15:0]};
+            1'b1: rd <= {{16{Dataout[31]}}, Dataout[31:16]};
             default: rd <= Dataout;
           endcase 
         end
@@ -108,7 +105,7 @@ module datamemory #(
               rd <= {16'b0, wd[15:0]};
             end
             1'b1: begin 
-              Wr <= 4'b1100;
+              wr <= 4'b1100;
               rd <= {wd[31:16], 16'b0};
             end     
             default: rd <= Dataout;
