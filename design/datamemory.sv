@@ -105,7 +105,7 @@ module datamemory #(
               rd <= {16'b0, wd[15:0]};
             end
             1'b1: begin 
-              wr <= 4'b1100;
+              Wr <= 4'b1100;
               rd <= {wd[31:16], 16'b0};
             end     
             default: rd <= Dataout;
