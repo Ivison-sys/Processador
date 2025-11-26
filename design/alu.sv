@@ -2,7 +2,7 @@
 
 module alu#(
         parameter DATA_WIDTH = 32,
-        parameter OPCODE_LENGTH = 4
+        parameter OPCODE_LENGTH = 5
         )
         (
         input logic [DATA_WIDTH-1:0]    SrcA,
@@ -14,28 +14,44 @@ module alu#(
     
         always_comb begin
         case(Operation)
-        4'b0000: // ADD
+        5'b00000: // ADD
             ALUResult = SrcA + SrcB;
-        4'b0001: // SUB
+        5'b00001: // SUB
             ALUResult = SrcA - SrcB;
-        4'b0010: // XOR   
+        5'b00010: // XOR   
             ALUResult = SrcA ^ SrcB;
-        4'b0011: // OR
+        5'b00011: // OR
             ALUResult = SrcA | SrcB;
-        4'b0100: // AND
+        5'b00100: // AND
             ALUResult = SrcA & SrcB;
-        4'b0101: // srl
+        5'b00101: // srl
             ALUResult = SrcA >> SrcB[4:0]; 
-        4'b0110: // sll
+        5'b00110: // sll
             ALUResult = SrcA << SrcB[4:0]; 
-        4'b0111: //sra
+        5'b00111: //sra
             ALUResult = $signed(SrcA) >>> SrcB[4:0]; 
-        4'b1000: //slt
+        5'b01000: //slt
             ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0; 
-        4'b1001: //sltu
+        5'b01001: //sltu
             ALUResult = (SrcA < SrcB) ? 1 : 0;
-        4'b1010: // Equal(BEQ)
+        5'b01010: // Equal(BEQ)
             ALUResult = (SrcA == SrcB) ? 1 : 0;
+        5'b01011: // BNE
+            ALUResult = (SrcA != SrcB) ? 1 : 0;
+        5'b01100: // BGE 
+           ALUResult = (SrcA >= SrcB) ? 1 : 0;
+        5'b01101: // BLT
+            ALUResult = (SrcA < SrcB) ? 1 : 0;
+        5'b01110: // JAl
+            ALUResult = pc;
+
+        5'b01111: //JAlR
+                 ALUResult = c + 4;
+
+         
+
+         
+
         default:
             ALUResult = 1;
         endcase
