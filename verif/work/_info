@@ -8,10 +8,10 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dD:/Users/TEMP.CIN.010/Documents/main/Processador/verif
+Z0 dD:/Users/mama3/Documents/mano/Processador/verif
 vadder
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1762988052
+Z2 !s110 1764204120
 !i10b 1
 !s100 J@Bf42a<9Q9R;nJSZl2>B2
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -19,7 +19,7 @@ IZ:4UR3bSaIa;]mF0d9zbS1
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-Z5 w1762977171
+Z5 w1764198240
 8./../design/adder.sv
 F./../design/adder.sv
 !i122 0
@@ -28,7 +28,7 @@ Z7 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z8 !s108 1762988052.000000
+Z8 !s108 1764204120.000000
 !s107 ./tb_top.sv|./../design/RISC_V.sv|./../design/Datapath.sv|./../design/instructionmemory.sv|./../design/datamemory.sv|./../design/mux4.sv|./../design/mux2.sv|./../design/imm_Gen.sv|./../design/HazardDetection.sv|./../design/ForwardingUnit.sv|./../design/flopr.sv|./../design/Controller.sv|./../design/BranchUnit.sv|./../design/ALUController.sv|./../design/alu.sv|./../design/RegFile.sv|./../design/RegPack.sv|./../design/Memoria32Data.sv|./../design/Memoria32.sv|./../design/ramOnChipData.v|./../design/ramOnChip32.v|./../design/adder.sv|
 Z9 !s90 -reportprogress|300|-f|compile_verilog|
 !i113 1
@@ -37,17 +37,17 @@ valu
 R1
 R2
 !i10b 1
-!s100 c:?oe:CmWbF0e6gi8@h<`1
+!s100 emiWmC?OD2IaV3IV2;L5P0
 R3
-IP@Xm_1PEi:dK4LI8emHKM1
+I8Xg>fjHGiB_fidMEfP[FP2
 R4
 S1
 R0
-w1762987996
+w1764201780
 8./../design/alu.sv
 F./../design/alu.sv
 !i122 0
-L0 3 41
+L0 3 55
 R7
 r1
 !s85 0
@@ -61,17 +61,17 @@ vALUController
 R1
 R2
 !i10b 1
-!s100 `T[0;0G2>N?AXVh@SXd>h2
+!s100 ^h=cQmcM3T`<G^^WfAIOf0
 R3
-IIbGNOVL26^hFbAjnG0ZD[1
+IoZhUaoQ_kU3l?XE<LY0CU2
 R4
 S1
 R0
-w1762981558
+w1764201845
 8./../design/ALUController.sv
 F./../design/ALUController.sv
 !i122 0
-L0 3 47
+L0 3 54
 R7
 r1
 !s85 0
@@ -86,17 +86,17 @@ vBranchUnit
 R1
 R2
 !i10b 1
-!s100 6mfj04GQ4<NdfP3N3I?:l2
+!s100 Ze<]`H6iLQ;0SeKnQ<<a?3
 R3
-IaMaAS@o[?Z0EK3hi9_B5_1
+I]?dG5?01QJ?1EVP4FKB[;0
 R4
 S1
 R0
-R5
+w1764204051
 8./../design/BranchUnit.sv
 F./../design/BranchUnit.sv
 !i122 0
-L0 3 26
+L0 3 39
 R7
 r1
 !s85 0
@@ -117,7 +117,7 @@ I>:8^lKfc7A1JU94JS52Vi1
 R4
 S1
 R0
-w1762980497
+R5
 8./../design/Controller.sv
 F./../design/Controller.sv
 !i122 0
@@ -142,7 +142,7 @@ IKnOMGjFQGLWU@SPMO2kEf1
 R4
 S1
 R0
-w1762978078
+R5
 8./../design/datamemory.sv
 F./../design/datamemory.sv
 !i122 0
@@ -159,22 +159,22 @@ R10
 vDatapath
 R1
 Z12 DXx4 work 16 Pipe_Buf_Reg_PKG 0 22 CP`NR8^c2NX`Y1z<Jz9aB2
-DXx4 work 16 Datapath_sv_unit 0 22 gK[1QCkf2n5n=M6K0GhRR3
+DXx4 work 16 Datapath_sv_unit 0 22 OzDj@]d40in=m@SX_b4Ta3
 R2
 R4
 r1
 !s85 0
 !i10b 1
-!s100 991<3MheQ^I4NU3Pg[PgS2
-I3<fh1B:C<nhfQ7dHkK;SZ3
+!s100 7A:54m>^K^QIWX4MlVZ9=0
+IDA89R:anm5oOX1M?0oQ^82
 !s105 Datapath_sv_unit
 S1
 R0
-Z13 w1762980372
+Z13 w1764204037
 Z14 8./../design/Datapath.sv
 Z15 F./../design/Datapath.sv
 !i122 0
-L0 5 312
+L0 5 320
 R7
 31
 R8
@@ -187,12 +187,12 @@ XDatapath_sv_unit
 R1
 R12
 R2
-VgK[1QCkf2n5n=M6K0GhRR3
+VOzDj@]d40in=m@SX_b4Ta3
 r1
 !s85 0
 !i10b 1
-!s100 K:EP;anA:W4111N=WXz4a0
-IgK[1QCkf2n5n=M6K0GhRR3
+!s100 Xg9jhR7M3BWb?TmO7;jHQ1
+IOzDj@]d40in=m@SX_b4Ta3
 !i103 1
 S1
 R0
@@ -287,17 +287,17 @@ vimm_Gen
 R1
 R2
 !i10b 1
-!s100 2d0Bbc5McTB^Nj2>P0=2K1
+!s100 i]8]YbBla7PY2:V@cENnR0
 R3
-INJUdWMDJGNMDK_1DmYjG10
+IX?^[cD9ZQ<;:>ZHDd?C^?2
 R4
 S1
 R0
-w1762986291
+R5
 8./../design/imm_Gen.sv
 F./../design/imm_Gen.sv
 !i122 0
-L0 3 38
+L0 3 33
 R7
 r1
 !s85 0
