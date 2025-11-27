@@ -28,6 +28,9 @@ module imm_Gen (
         1'b0
       };
 
+      7'b1101111: // J-Type
+      Imm_out = {{12{inst_code[31]}}, inst_code[19:12], inst_code[20], inst_code[30:21], 1'b0};//aaaaaa
+
       default: Imm_out = {32'b0};
 
     endcase

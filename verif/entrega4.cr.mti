@@ -1,9 +1,33 @@
-D:/Users/mama3/Documents/mano/Processador/design/BranchUnit.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/BranchUnit.sv
+D:/Users/egsp/Documents/Processador/design/Datapath.sv {2 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/Datapath.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+** Warning: D:/Users/egsp/Documents/Processador/design/Datapath.sv(3): (vlog-13233) Design unit "Datapath_sv_unit" already exists and will be overwritten. Overwriting SystemVerilog $unit with different source files.
+-- Compiling package Datapath_sv_unit
+-- Importing package Pipe_Buf_Reg_PKG
+-- Compiling module Datapath
+
+Top level modules:
+	Datapath
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/ramOnChipData.v {1 {vlog -work work -stats=none D:/Users/egsp/Documents/Processador/design/ramOnChipData.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ramOnChipData
+
+Top level modules:
+	ramOnChipData
+
+} {} {}} D:/Users/mama3/Documents/mano/Processador/design/BranchUnit.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/BranchUnit.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module BranchUnit
 
 Top level modules:
 	BranchUnit
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/Memoria32Data.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/Memoria32Data.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Memoria32Data
+
+Top level modules:
+	Memoria32Data
 
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/Datapath.sv {2 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/Datapath.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -15,6 +39,20 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	Datapath
 
+} {} {}} D:/Users/egsp/Documents/Processador/design/alu.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/alu.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module alu
+
+Top level modules:
+	alu
+
+} {} {}} D:/Users/egsp/Documents/Processador/verif/tb_top.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/verif/tb_top.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module tb_top
+
+Top level modules:
+	tb_top
+
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/ramOnChipData.v {1 {vlog -work work -stats=none D:/Users/mama3/Documents/mano/Processador/design/ramOnChipData.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module ramOnChipData
@@ -22,12 +60,47 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	ramOnChipData
 
+} {} {}} D:/Users/egsp/Documents/Processador/design/ramOnChip32.v {1 {vlog -work work -stats=none D:/Users/egsp/Documents/Processador/design/ramOnChip32.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ramOnChip32
+
+Top level modules:
+	ramOnChip32
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/instructionmemory.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/instructionmemory.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module instructionmemory
+
+Top level modules:
+	instructionmemory
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/ForwardingUnit.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/ForwardingUnit.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ForwardingUnit
+
+Top level modules:
+	ForwardingUnit
+
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/Memoria32Data.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/Memoria32Data.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module Memoria32Data
 
 Top level modules:
 	Memoria32Data
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/Controller.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/Controller.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Controller
+
+Top level modules:
+	Controller
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/mux2.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/mux2.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux2
+
+Top level modules:
+	mux2
 
 } {} {}} D:/Users/mama3/Documents/mano/Processador/verif/tb_top.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/verif/tb_top.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -64,6 +137,27 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	instructionmemory
 
+} {} {}} D:/Users/egsp/Documents/Processador/design/RegFile.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/RegFile.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module RegFile
+
+Top level modules:
+	RegFile
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/mux4.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/mux4.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux4
+
+Top level modules:
+	mux4
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/ALUController.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/ALUController.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALUController
+
+Top level modules:
+	ALUController
+
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/mux2.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/mux2.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module mux2
@@ -85,6 +179,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	imm_Gen
 
+} {} {}} D:/Users/egsp/Documents/Processador/design/Memoria32.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/Memoria32.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Memoria32
+
+Top level modules:
+	Memoria32
+
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/RegPack.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/RegPack.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling package Pipe_Buf_Reg_PKG
@@ -92,19 +193,19 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	--none--
 
-} {} {}} D:/Users/mama3/Documents/mano/Processador/design/ALUController.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/ALUController.sv
+} {} {}} D:/Users/egsp/Documents/Processador/design/adder.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/adder.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module ALUController
+-- Compiling module adder
 
 Top level modules:
-	ALUController
+	adder
 
-} {} {}} D:/Users/mama3/Documents/mano/Processador/design/mux4.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/mux4.sv
+} {} {}} D:/Users/mama3/Documents/mano/Processador/design/RISC_V.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/RISC_V.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module mux4
+-- Compiling module riscv
 
 Top level modules:
-	mux4
+	riscv
 
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/RegFile.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/RegFile.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -113,12 +214,26 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	RegFile
 
-} {} {}} D:/Users/mama3/Documents/mano/Processador/design/RISC_V.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/RISC_V.sv
+} {} {}} D:/Users/mama3/Documents/mano/Processador/design/mux4.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/mux4.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module riscv
+-- Compiling module mux4
 
 Top level modules:
-	riscv
+	mux4
+
+} {} {}} D:/Users/mama3/Documents/mano/Processador/design/ALUController.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/ALUController.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALUController
+
+Top level modules:
+	ALUController
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/HazardDetection.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/HazardDetection.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module HazardDetection
+
+Top level modules:
+	HazardDetection
 
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/Memoria32.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/Memoria32.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -134,12 +249,33 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	adder
 
+} {} {}} D:/Users/egsp/Documents/Processador/design/flopr.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/flopr.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module flopr
+
+Top level modules:
+	flopr
+
+} {} {}} D:/Users/egsp/Documents/Processador/design/datamemory.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/datamemory.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module datamemory
+
+Top level modules:
+	datamemory
+
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/HazardDetection.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/HazardDetection.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module HazardDetection
 
 Top level modules:
 	HazardDetection
+
+} {} {}} D:/Users/mama3/Documents/mano/Processador/design/datamemory.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/datamemory.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module datamemory
+
+Top level modules:
+	datamemory
 
 } {} {}} D:/Users/mama3/Documents/mano/Processador/design/flopr.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/flopr.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -148,11 +284,11 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	flopr
 
-} {} {}} D:/Users/mama3/Documents/mano/Processador/design/datamemory.sv {1 {vlog -work work -sv -stats=none D:/Users/mama3/Documents/mano/Processador/design/datamemory.sv
+} {} {}} D:/Users/egsp/Documents/Processador/design/BranchUnit.sv {1 {vlog -work work -sv -stats=none D:/Users/egsp/Documents/Processador/design/BranchUnit.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module datamemory
+-- Compiling module BranchUnit
 
 Top level modules:
-	datamemory
+	BranchUnit
 
 } {} {}}

@@ -45,12 +45,15 @@ module ALUController (
             Operation <= 5'b01010; // BEQ
         end else if(Funct3 == 3'b001) begin
             Operation <= 5'b01011; // BNE
-        end else if(Funct3 == 3'b101) 
+        end else if(Funct3 == 3'b101) begin
             Operation <= 5'b01100; // BGE
+        end else if(Funct3 == 3'b100) begin
+            Operation <= 5'b01101; // BLT
+        end else begin
+            Operation <= 5'b01111; // DEFAULT
         end
-
     end else begin
-        Operation <= 5'b01111;
+        Operation <= 5'b00000; //aluop == 11, significa instrucao de jump. ULA vai calcular o endereço de retorno.
     end
 end
 endmodule

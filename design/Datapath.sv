@@ -7,23 +7,25 @@ module Datapath #(
     parameter INS_W = 32,  // Instruction Width
     parameter RF_ADDRESS = 5,  // Register File Address
     parameter DATA_W = 32,  // Data WriteData
-    parameter DM_ADDRESS = 9,  // Data Memory Address
+    parameter DM_ADDRESS = 9,  // Data Memory Address 
     parameter ALU_CC_W = 4  // ALU Control Code Width
 ) (
     input  logic                 clk,
     reset,
     RegWrite,
-    MemtoReg,  // Register file writing enable   // Memory or ALU MUX
+    // Register file writing enable   // Memory or ALU MUX
+    Jump,
+    Sel_jalr,
     ALUSrc,
     MemWrite,  // Register file or Immediate MUX // Memroy Writing Enable
     MemRead,  // Memroy Reading Enable
     Branch,  // Branch Enable
-    input  logic [          1:0] ALUOp,
+    input  logic [          1:0] ALUOp, MemtoReg,
     input  logic [ALU_CC_W -1:0] ALU_CC,         // ALU Control Code ( input of the ALU )
     output logic [          6:0] opcode,
     output logic [          6:0] Funct7,
     output logic [          2:0] Funct3,
-    output logic [          1:0] ALUOp_Current,
+    output logic [          1:0] ALUOp_Current, 
     output logic [   DATA_W-1:0] WB_Data,        //Result After the last MUX
 
     // Para depuração no tesbench:
@@ -220,7 +222,9 @@ module Datapath #(
   BranchUnit #(9) brunit (
       B.Curr_Pc,
       B.ImmG,
-      B.Branch,
+      Branch,
+      Jump,
+      Sel_jalr,
       ALUResult,
       BrImm,
       Old_PC_Four,
@@ -304,11 +308,20 @@ module Datapath #(
   end
 
   //--// The LAST Block
-  mux2 #(32) resmux (
-      D.Alu_Result,
-      D.MemReadData,
-      D.MemtoReg,
-      WrmuxSrc
+  // mux2 #(32) resmux (
+  //     D.Alu_Result,
+  //     D.MemReadData,
+  //     D.MemtoReg,
+  //     WrmuxSrc
+  // );
+
+  mux4 #(32) wrs (
+    D.Alu_Result,
+    D.MemReadData,
+    D.Pc_Four,
+    D.Pc_Imm,
+    D.MemtoReg,
+    WrmuxSrc
   );
 
   assign WB_Data = WrmuxSrc;

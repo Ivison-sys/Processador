@@ -14,7 +14,7 @@ module alu#(
     
         always_comb begin
         case(Operation)
-        5'b00000: // ADD
+        5'b00000: // ADD, JALR 
             ALUResult = SrcA + SrcB;
         5'b00001: // SUB
             ALUResult = SrcA - SrcB;
@@ -42,18 +42,8 @@ module alu#(
            ALUResult = (SrcA >= SrcB) ? 1 : 0;
         5'b01101: // BLT
             ALUResult = (SrcA < SrcB) ? 1 : 0;
-        5'b01110: // JAl
-            ALUResult = pc;
-
-        5'b01111: //JAlR
-                 ALUResult = c + 4;
-
-         
-
-         
-
         default:
-            ALUResult = 1;
+            ALUResult = 0;
         endcase
     end
 endmodule
