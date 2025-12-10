@@ -60,10 +60,13 @@ module Datapath #(
   ex_mem_reg C;
   mem_wb_reg D;
 
+  logic [8:0] sum;
+  assign sum = (opcode != 7'b1111111) ? 9'b0 : 9'b100;
+
   // next PC
   adder #(9) pcadd (
       PC,
-      9'b100,
+      sum,
       PCPlus4
   );
   mux2 #(9) pcmux (
