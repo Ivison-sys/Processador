@@ -12,7 +12,8 @@ module BranchUnit #(
     output logic [31:0] PC_Imm,
     output logic [31:0] PC_Four,
     output logic [31:0] BrPC,
-    output logic PcSel
+    output logic PcSel,
+    input logic halt
 );
 
   logic Branch_Sel;
@@ -30,7 +31,11 @@ module BranchUnit #(
       if (Sel_jalr) begin BrPC = AluResult; end
       else begin BrPC = PC_Imm; end
     end else begin
-        BrPC = 32'b0;
+      if(halt) begin 
+        BrPC = PC_Full;
+      end else begin
+          BrPC = 32'b0;
+      end
     end
   end
 

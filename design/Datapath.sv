@@ -38,7 +38,9 @@ module Datapath #(
     output logic reade,  // read enable
     output logic [DM_ADDRESS-1:0] addr,  // address
     output logic [DATA_W-1:0] wr_data,  // write data
-    output logic [DATA_W-1:0] rd_data  // read data
+    output logic [DATA_W-1:0] rd_data, // read data
+    output logic halt
+
 );
 
   logic [PC_W-1:0] PC, PCPlus4, Next_PC;
@@ -54,14 +56,16 @@ module Datapath #(
   logic [DATA_W-1:0] FAmux_Result;
   logic [DATA_W-1:0] FBmux_Result;
   logic Reg_Stall;  //1: PC fetch same, Register not update
-
+  logic [8:0] sum;
   if_id_reg A;
   id_ex_reg B;
   ex_mem_reg C;
   mem_wb_reg D;
 
-  logic [8:0] sum;
-  assign sum = (opcode != 7'b1111111) ? 9'b0 : 9'b100;
+  
+  assign sum = (opcode == 7'b1111111) ? 9'b0 : 9'b100;  
+  
+  assign halt = (sum == 9'b0) ? 1 : 0;
 
   // next PC
   adder #(9) pcadd (
@@ -237,7 +241,8 @@ module Datapath #(
       BrImm,
       Old_PC_Four,
       BrPC,
-      PcSel
+      PcSel,
+      halt
   );
 
   // EX_MEM_Reg C;
