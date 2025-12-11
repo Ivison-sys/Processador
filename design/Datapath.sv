@@ -7,27 +7,27 @@ module Datapath #(
     parameter INS_W = 32,  // Instruction Width
     parameter RF_ADDRESS = 5,  // Register File Address
     parameter DATA_W = 32,  // Data WriteData
-    parameter DM_ADDRESS = 9,  // Data Memory Address 
+    parameter DM_ADDRESS = 9,  // Data Memory Address
     parameter ALU_CC_W = 4  // ALU Control Code Width
 ) (
     input  logic                 clk,
-    reset,
-    RegWrite,
-    // Register file writing enable   // Memory or ALU MUX
-    Jump,
-    Sel_jalr,
-    ALUSrc,
-    MemWrite,  // Register file or Immediate MUX // Memroy Writing Enable
-    MemRead,  // Memroy Reading Enable
-    Branch,  // Branch Enable
+    input  logic                 reset,
+    input  logic                 RegWrite,
+    input  logic [1:0]           MemtoReg,  // CORRIGIDO: Agora aceita 2 bits do Controller
+    input  logic                 ALUsrc,
+    input  logic                 MemWrite,  // Register file or Immediate MUX // Memroy Writing Enable
+    input  logic                 MemRead,   // Memroy Reading Enable
+    input  logic                 Branch,    // Branch Enable
+    input  logic                 Jal,       // JAL Enable
+    input  logic                 Jalr,      // JALR Enable
+    input  logic                 Halt,      // INPUT DO HALT
     input  logic [          1:0] ALUOp,
-    input  logic [          1:0] MemtoReg,
-    input  logic [ALU_CC_W -1:0] ALU_CC,         // ALU Control Code ( input of the ALU )
+    input  logic [ALU_CC_W -1:0] ALU_CC,          // ALU Control Code ( input of the ALU )
     output logic [          6:0] opcode,
     output logic [          6:0] Funct7,
     output logic [          2:0] Funct3,
-    output logic [          1:0] ALUOp_Current, 
-    output logic [   DATA_W-1:0] WB_Data,        //Result After the last MUX
+    output logic [          1:0] ALUOp_Current,
+    output logic [   DATA_W-1:0] WB_Data,         //Result After the last MUX
 
     // Para depuração no tesbench:
     output logic [4:0] reg_num,  //número do registrador que foi escrito
@@ -38,7 +38,7 @@ module Datapath #(
     output logic reade,  // read enable
     output logic [DM_ADDRESS-1:0] addr,  // address
     output logic [DATA_W-1:0] wr_data,  // write data
-    output logic [DATA_W-1:0] rd_data  // read data
+    output logic [DATA_W-1:0] rd_data   // read data
 );
 
   logic [PC_W-1:0] PC, PCPlus4, Next_PC;
@@ -47,8 +47,8 @@ module Datapath #(
   logic [DATA_W-1:0] ReadData;
   logic [DATA_W-1:0] SrcB, ALUResult;
   logic [DATA_W-1:0] ExtImm, BrImm, Old_PC_Four, BrPC;
-  logic [DATA_W-1:0] WrmuxSrc;
-  logic PcSel;  // mux select / flush signal
+  logic [DATA_W-1:0] WrmuxSrc, WrmuxSrc2;
+  logic PcSel, JSel;  // mux select / flush signal
   logic [1:0] FAmuxSel;
   logic [1:0] FBmuxSel;
   logic [DATA_W-1:0] FAmux_Result;
@@ -72,13 +72,16 @@ module Datapath #(
       PcSel,
       Next_PC
   );
+  
+  // --- LÓGICA DO PC COM HALT ---
   flopr #(9) pcreg (
       clk,
       reset,
       Next_PC,
-      Reg_Stall,
+      (Reg_Stall | Halt), // Se tiver Stall de Hazard OU Halt, o PC trava
       PC
   );
+  
   instructionmemory instr_mem (
       clk,
       PC,
@@ -88,24 +91,26 @@ module Datapath #(
   // IF_ID_Reg A;
   always @(posedge clk) begin
     if ((reset) || (PcSel))   // initialization or flush
-        begin
+    begin
       A.Curr_Pc <= 0;
       A.Curr_Instr <= 0;
     end
-        else if (!Reg_Stall)    // stall
-        begin
-      A.Curr_Pc <= PC;
-      A.Curr_Instr <= Instr;
-    end
+    else if (!Reg_Stall && !Halt) 
+      begin
+        A.Curr_Pc <= PC;
+        A.Curr_Instr <= Instr;
+      end
   end
 
   //--// The Hazard Detection Unit
+  // Atualizei para usar instanciação por nome (.pino) para evitar erros com o novo pino Halt
   HazardDetection detect (
-      A.Curr_Instr[19:15],
-      A.Curr_Instr[24:20],
-      B.rd,
-      B.MemRead,
-      Reg_Stall
+      .IF_ID_RS1(A.Curr_Instr[19:15]), 
+      .IF_ID_RS2(A.Curr_Instr[24:20]),
+      .ID_EX_rd(B.rd),
+      .ID_EX_MemRead(B.MemRead),
+      .Halt(Halt),       // <--- CONEXÃO DO SINAL HALT AQUI
+      .stall(Reg_Stall)  // Saída do Stall
   );
 
   // //Register File
@@ -118,13 +123,13 @@ module Datapath #(
       D.rd,
       A.Curr_Instr[19:15],
       A.Curr_Instr[24:20],
-      WrmuxSrc,
+      WB_Data,
       Reg1,
       Reg2
   );
 
   assign reg_num = D.rd;
-  assign reg_data = WrmuxSrc;
+  assign reg_data = WB_Data;
   assign reg_write_sig = D.RegWrite;
 
   // //sign extend
@@ -132,6 +137,7 @@ module Datapath #(
       A.Curr_Instr,
       ExtImm
   );
+
 
   // ID_EX_Reg B;
   always @(posedge clk) begin
@@ -144,8 +150,8 @@ module Datapath #(
       B.MemWrite <= 0;
       B.ALUOp <= 0;
       B.Branch <= 0;
-      B.Jump <= 0;
-      B.Sel_jalr <= 0;
+      B.Jal <= 0;
+      B.Jalr <= 0;
       B.Curr_Pc <= 0;
       B.RD_One <= 0;
       B.RD_Two <= 0;
@@ -157,15 +163,19 @@ module Datapath #(
       B.func7 <= 0;
       B.Curr_Instr <= A.Curr_Instr;  //debug tmp
     end else begin
-      B.ALUSrc <= ALUSrc;
-      B.MemtoReg <= MemtoReg;
+      B.ALUSrc <= ALUsrc;
+      
+      // Nota: Estamos pegando apenas o bit 0 se o pacote esperar 1 bit.
+      // Se MemtoReg no pacote for 2 bits, altere para: B.MemtoReg <= MemtoReg;
+      B.MemtoReg <= MemtoReg[0]; 
+      
       B.RegWrite <= RegWrite;
       B.MemRead <= MemRead;
       B.MemWrite <= MemWrite;
       B.ALUOp <= ALUOp;
       B.Branch <= Branch;
-      B.Jump <= Jump;
-      B.Sel_jalr <= Sel_jalr;
+      B.Jal <= Jal;
+      B.Jalr <= Jalr;
       B.Curr_Pc <= A.Curr_Pc;
       B.RD_One <= Reg1;
       B.RD_Two <= Reg2;
@@ -198,7 +208,7 @@ module Datapath #(
 
   mux4 #(32) FAmux (
       B.RD_One,
-      WrmuxSrc,
+      WB_Data,
       C.Alu_Result,
       B.RD_One,
       FAmuxSel,
@@ -206,7 +216,7 @@ module Datapath #(
   );
   mux4 #(32) FBmux (
       B.RD_Two,
-      WrmuxSrc,
+      WB_Data,
       C.Alu_Result,
       B.RD_Two,
       FBmuxSel,
@@ -228,13 +238,14 @@ module Datapath #(
       B.Curr_Pc,
       B.ImmG,
       B.Branch,
-      B.Jump,
-      B.Sel_jalr,
+      B.Jal,
+      B.Jalr,
       ALUResult,
       BrImm,
       Old_PC_Four,
       BrPC,
-      PcSel
+      PcSel,
+      JSel
   );
 
   // EX_MEM_Reg C;
@@ -253,6 +264,7 @@ module Datapath #(
       C.rd <= 0;
       C.func3 <= 0;
       C.func7 <= 0;
+      C.JSel <= 0;  // flush signal
     end else begin
       C.RegWrite <= B.RegWrite;
       C.MemtoReg <= B.MemtoReg;
@@ -267,10 +279,11 @@ module Datapath #(
       C.func3 <= B.func3;
       C.func7 <= B.func7;
       C.Curr_Instr <= B.Curr_Instr;  // debug tmp
+      C.JSel <= JSel;
     end
   end
 
-  // // // // Data memory 
+  // // // // Data memory
   datamemory data_mem (
       clk,
       C.MemRead,
@@ -299,6 +312,7 @@ module Datapath #(
       D.Alu_Result <= 0;
       D.MemReadData <= 0;
       D.rd <= 0;
+      D.JSel <= 0;
     end else begin
       D.RegWrite <= C.RegWrite;
       D.MemtoReg <= C.MemtoReg;
@@ -309,26 +323,25 @@ module Datapath #(
       D.MemReadData <= ReadData;
       D.rd <= C.rd;
       D.Curr_Instr <= C.Curr_Instr;  //Debug Tmp
+      D.JSel <= C.JSel;  // flush signal
     end
   end
 
   //--// The LAST Block
-  // mux2 #(32) resmux (
-  //     D.Alu_Result,
-  //     D.MemReadData,
-  //     D.MemtoReg,
-  //     WrmuxSrc
-  // );
-
-  mux4 #(32) wrs (
-    D.Alu_Result,
-    D.MemReadData,
-    D.Pc_Four,
-    D.Pc_Imm,
-    D.MemtoReg,
-    WrmuxSrc
+  mux2 #(32) resmux (
+      D.Alu_Result,
+      D.MemReadData,
+      D.MemtoReg,
+      WrmuxSrc
   );
 
-  assign WB_Data = WrmuxSrc;
+  mux2 #(32) wrs_Mux (
+      WrmuxSrc,
+      D.Pc_Four,
+      D.JSel,
+      WrmuxSrc2
+  );
+
+  assign WB_Data = WrmuxSrc2;
 
 endmodule
