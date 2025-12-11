@@ -14,6 +14,9 @@ module tb_top;
   logic [8:0] addr;
   logic [31:0] wr_data;
   logic [31:0] rd_data;
+  
+  // --- NOVO SINAL ---
+  logic Halt_Out; 
 
   localparam CLKPERIOD = 10;
   localparam CLKDELAY = CLKPERIOD / 2;
@@ -29,7 +32,8 @@ module tb_top;
       .rd(rd),
       .addr(addr),
       .wr_data(wr_data),
-      .rd_data(rd_data)
+      .rd_data(rd_data),
+      .Halt_Out(Halt_Out) // <--- CORREÇÃO DO ERRO DE CONEXÃO
   );
 
   initial begin
@@ -37,12 +41,21 @@ module tb_top;
     reset  = 1;
     #(CLKPERIOD);
     reset = 0;
-
-    #(CLKPERIOD * 50);
-
-    $stop;
+    
+    // Removi o tempo fixo (#500) e o $stop daqui.
+    // Agora o simulation para quando o Halt ativar (veja abaixo).
   end
 
+  // --- LÓGICA PARA PARAR A SIMULAÇÃO QUANDO O HALT CHEGAR ---
+  always @(posedge Halt_Out) begin
+      $display("\n-------------------------------------------------------------");
+      $display("--- SINAL DE HALT DETECTADO: FIM DA EXECUCAO ---");
+      $display("-------------------------------------------------------------\n");
+      #(CLKPERIOD*2); // Espera uns ciclos para garantir a escrita final
+      $stop;
+  end
+
+  // --- SEUS DISPLAYS DE DEBUG (MANTIDOS) ---
   always_comb begin : MEMORY
     if (wr && ~rd)
       $display($time, ": Memory [%d] written with value: [%X] | [%d]\n", addr, wr_data, wr_data);
